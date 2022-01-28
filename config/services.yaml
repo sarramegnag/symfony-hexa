@@ -1,0 +1,24 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    _instanceof:
+        App\Application\Command\CommandHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: command.bus }
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Domain/'
+            - '../src/Infrastructure/DependencyInjection/'
+            - '../src/Infrastructure/Entity/'
+            - '../src/Infrastructure/Kernel.php'
+            - '../src/Infrastructure/Tests/'
+
+    App\Infrastructure\Controller\:
+        resource: '%kernel.project_dir%/src/Infrastructure/Controller/'
+        tags: ['controller.service_arguments']
+
+    App\Domain\Question\Repository\QuestionRepositoryInterface: '@App\Infrastructure\Repository\QuestionRepository'
