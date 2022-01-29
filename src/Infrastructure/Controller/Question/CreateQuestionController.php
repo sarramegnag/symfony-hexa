@@ -3,7 +3,7 @@
 namespace App\Infrastructure\Controller\Question;
 
 use App\Application\Command\CommandBusInterface;
-use App\Application\Command\Question\Create\CreateQuestionCommandInterface;
+use App\Application\Command\Question\Create\CreateQuestionCommand;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +19,7 @@ class CreateQuestionController
         $questionData = json_decode($request->getContent(), true);
 
         try {
-            $commandBus->dispatch(new CreateQuestionCommandInterface($questionData));
+            $commandBus->dispatch(new CreateQuestionCommand($questionData));
         } catch (HandlerFailedException $e) {
             $previous = $e->getPrevious();
 

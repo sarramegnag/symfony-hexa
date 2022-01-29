@@ -22,4 +22,12 @@ class QuestionRepository extends ServiceEntityRepository implements QuestionRepo
         $this->_em->persist($questionEntity);
         $this->_em->flush();
     }
+
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function readAll(): array
+    {
+        return $this->_em->getConnection()->fetchAllAssociative('SELECT * FROM question');
+    }
 }

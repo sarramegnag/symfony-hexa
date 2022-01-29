@@ -7,6 +7,9 @@ services:
         App\Application\Command\CommandHandlerInterface:
             tags:
                 - { name: messenger.message_handler, bus: command.bus }
+        App\Application\Query\QueryHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: query.bus }
 
     App\:
         resource: '../src/'
