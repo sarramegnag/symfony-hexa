@@ -12,16 +12,32 @@ services:
                 - { name: messenger.message_handler, bus: query.bus }
 
     App\:
-        resource: '../src/'
+        resource: '%kernel.project_dir%/src/'
         exclude:
-            - '../src/Domain/'
-            - '../src/Infrastructure/DependencyInjection/'
-            - '../src/Infrastructure/Entity/'
-            - '../src/Infrastructure/Kernel.php'
-            - '../src/Infrastructure/Tests/'
+            - '%kernel.project_dir%/src/Domain/'
+            - '%kernel.project_dir%/src/Infrastructure/DependencyInjection/'
+            - '%kernel.project_dir%/src/Infrastructure/Entity/'
+            - '%kernel.project_dir%/src/Infrastructure/Kernel.php'
+            - '%kernel.project_dir%/src/Infrastructure/Tests/'
 
     App\Infrastructure\Controller\:
         resource: '%kernel.project_dir%/src/Infrastructure/Controller/'
         tags: ['controller.service_arguments']
 
-    App\Domain\Question\Repository\QuestionRepositoryInterface: '@App\Infrastructure\Repository\QuestionRepository'
+when@test_fake:
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Tests\Behat\:
+            resource: '%kernel.project_dir%/tests/Behat/*'
+
+when@test_real:
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Tests\Behat\:
+            resource: '%kernel.project_dir%/tests/Behat/*'

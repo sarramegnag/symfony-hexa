@@ -6,7 +6,9 @@ namespace App\Infrastructure\Bus;
 
 use App\Application\Command\CommandBusInterface;
 use App\Application\Command\CommandInterface;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Throwable;
 
 class MessengerCommandBus implements CommandBusInterface
 {
@@ -15,8 +17,15 @@ class MessengerCommandBus implements CommandBusInterface
     ) {
     }
 
+    /**
+     * @throws Throwable
+     */
     public function dispatch(CommandInterface $command): void
     {
-        $this->commandBus->dispatch($command);
+        try {
+            $this->commandBus->dispatch($command);
+        } catch (HandlerFailedException $e) {
+            throw $e->getPrevious();
+        }
     }
 }

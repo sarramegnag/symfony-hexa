@@ -1,0 +1,26 @@
+fake:
+    suites:
+        default:
+            contexts:
+                - App\Tests\Behat\QuestionContext
+
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+            bootstrap: tests/bootstrap.php
+            kernel:
+                class: App\Infrastructure\Kernel
+                environment: test_fake
+
+real:
+    suites:
+        default:
+            contexts:
+                - App\Tests\Behat\ResetDatabaseContext
+                - App\Tests\Behat\QuestionContext
+
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+            bootstrap: tests/bootstrap.php
+            kernel:
+                class: App\Infrastructure\Kernel
+                environment: test_real

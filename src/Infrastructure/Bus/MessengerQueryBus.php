@@ -8,6 +8,7 @@ use App\Application\Command\CommandBusInterface;
 use App\Application\Command\CommandInterface;
 use App\Application\Query\QueryBusInterface;
 use App\Application\Query\QueryInterface;
+use App\Application\Query\ViewModelInterface;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -21,7 +22,7 @@ class MessengerQueryBus implements QueryBusInterface
         $this->messageBus = $queryBus;
     }
 
-    public function ask(QueryInterface $query): mixed
+    public function ask(QueryInterface $query): ViewModelInterface
     {
         return $this->handle($query);
     }

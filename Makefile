@@ -11,6 +11,7 @@ EXEC_PHP        = $(DOCKER_EXEC) php
 
 SYMFONY         = $(EXEC_PHP) php bin/console
 COMPOSER        = $(EXEC_PHP) composer
+BEHAT           = $(EXEC_PHP) vendor/bin/behat
 
 ##
 ## Project
@@ -83,7 +84,18 @@ migration: ## Generate a new doctrine migration
 migration: vendor
 	$(SYMFONY) make:migration
 
-.PHONY: db migration
+test_fake: ## Launch tests with in-memory adapters
+test_fake:
+	$(BEHAT) -p fake
+
+test_real: ## Launch tests with in-memory adapters
+test_real:
+	-$(SYMFONY) doctrine:database:drop --if-exists --force --env=test_real
+	-$(SYMFONY) doctrine:database:create --if-not-exists --env=test_real
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration --env=test_real
+	$(BEHAT) -p real
+
+.PHONY: composer_req composer_rem composer_install sf sf_entity db migration
 
 # rules based on files
 composer.lock: composer.json

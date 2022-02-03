@@ -1,0 +1,2 @@
+services:
+    App\Domain\Question\Repository\QuestionRepositoryInterface: '@App\Infrastructure\Repository\InMemory\QuestionRepository'
