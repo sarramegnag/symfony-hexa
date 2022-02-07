@@ -24,6 +24,8 @@ services:
         resource: '%kernel.project_dir%/src/Infrastructure/Controller/'
         tags: ['controller.service_arguments']
 
+    Symfony\Component\Serializer\Normalizer\PropertyNormalizer: ~
+
 when@test_fake:
     services:
         _defaults:

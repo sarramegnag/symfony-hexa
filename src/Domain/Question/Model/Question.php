@@ -8,9 +8,4 @@ class Question
         private string $title
     ) {
     }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 }

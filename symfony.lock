@@ -148,6 +148,9 @@
     "phpspec/prophecy": {
         "version": "v1.15.0"
     },
+    "phpstan/phpdoc-parser": {
+        "version": "1.2.0"
+    },
     "phpunit/php-code-coverage": {
         "version": "9.2.10"
     },
@@ -385,6 +388,12 @@
     "symfony/polyfill-php81": {
         "version": "v1.24.0"
     },
+    "symfony/property-access": {
+        "version": "v6.0.3"
+    },
+    "symfony/property-info": {
+        "version": "v6.0.3"
+    },
     "symfony/proxy-manager-bridge": {
         "version": "v6.0.2"
     },
@@ -403,6 +412,9 @@
     },
     "symfony/runtime": {
         "version": "v6.0.0"
+    },
+    "symfony/serializer": {
+        "version": "v6.0.3"
     },
     "symfony/service-contracts": {
         "version": "v3.0.0"

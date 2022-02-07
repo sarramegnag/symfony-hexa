@@ -16,13 +16,6 @@ class Question
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title;
 
-    public static function createFromDTO(\App\Domain\Question\Model\Question $question): self
-    {
-        return (new self())
-            ->setTitle($question->getTitle())
-        ;
-    }
-
     public function getId(): ?int
     {
         return $this->id;
