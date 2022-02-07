@@ -24,7 +24,7 @@ class QuestionContext implements Context
      */
     public function iCreateAQuestionWithTitle(string $title): void
     {
-        $this->commandBus->dispatch(new CreateQuestionCommand(['title' => $title]));
+        $this->commandBus->dispatch(new CreateQuestionCommand($title));
     }
 
     /**
@@ -50,7 +50,7 @@ class QuestionContext implements Context
     public function iCreateAQuestionWithAnEmptyTitle(): void
     {
         try {
-            $this->commandBus->dispatch(new CreateQuestionCommand(['title' => '']));
+            $this->commandBus->dispatch(new CreateQuestionCommand(''));
         } catch (\Throwable $t) {
             $this->throwable = $t;
         }

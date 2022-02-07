@@ -7,12 +7,12 @@ use App\Application\Command\CommandInterface;
 class CreateQuestionCommand implements CommandInterface
 {
     public function __construct(
-        private array $data
+        private string $title
     ) {
     }
 
-    public function getData(): array
+    public function getTitle(): string
     {
-        return $this->data;
+        return $this->title;
     }
 }

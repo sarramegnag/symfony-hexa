@@ -18,7 +18,7 @@ class CreateQuestionController
         $questionData = json_decode($request->getContent(), true) ?? [];
 
         try {
-            $commandBus->dispatch(new CreateQuestionCommand($questionData));
+            $commandBus->dispatch(new CreateQuestionCommand($questionData['title']));
         } catch (NestedValidationException $e) {
             return new JsonResponse(
                 $e->getMessages(),
