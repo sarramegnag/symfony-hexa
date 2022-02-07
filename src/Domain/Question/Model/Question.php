@@ -9,8 +9,13 @@ class Question
     ) {
     }
 
-    public function getTitle(): string
+    public function saveSnapshot(): QuestionSnapshot
     {
-        return $this->title;
+        return new QuestionSnapshot($this->title);
+    }
+
+    public static function restoreSnapshot(QuestionSnapshot $snapshot): self
+    {
+        return new self($snapshot->getTitle());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Entity;
 
+use App\Domain\Question\Model\QuestionSnapshot;
 use App\Infrastructure\Repository\QuestionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,10 +17,10 @@ class Question
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title;
 
-    public static function createFromDTO(\App\Domain\Question\Model\Question $question): self
+    public static function createFromSnapshot(QuestionSnapshot $snapshot): self
     {
         return (new self())
-            ->setTitle($question->getTitle())
+            ->setTitle($snapshot->getTitle())
         ;
     }
 

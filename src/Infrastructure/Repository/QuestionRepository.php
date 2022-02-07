@@ -17,7 +17,7 @@ class QuestionRepository extends ServiceEntityRepository implements QuestionRepo
 
     public function create(Question $question): void
     {
-        $questionEntity = QuestionEntity::createFromDTO($question);
+        $questionEntity = QuestionEntity::createFromSnapshot($question->saveSnapshot());
 
         $this->_em->persist($questionEntity);
         $this->_em->flush();

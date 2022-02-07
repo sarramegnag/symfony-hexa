@@ -12,7 +12,7 @@ class QuestionRepository implements QuestionRepositoryInterface
 
     public function create(Question $question): void
     {
-        $questionEntity = QuestionEntity::createFromDTO($question);
+        $questionEntity = QuestionEntity::createFromSnapshot($question->saveSnapshot());
         $maxId = array_reduce(
             $this->questions,
             fn (int $carry, QuestionEntity $q): int => $q->getId() > $carry ? $q->getId() : $carry,
