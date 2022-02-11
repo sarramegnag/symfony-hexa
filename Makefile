@@ -12,6 +12,7 @@ EXEC_PHP        = $(DOCKER_EXEC) php
 SYMFONY         = $(EXEC_PHP) php bin/console
 COMPOSER        = $(EXEC_PHP) composer
 BEHAT           = $(EXEC_PHP) vendor/bin/behat
+CS_FIXER           = $(EXEC_PHP) vendor/bin/php-cs-fixer
 
 ##
 ## Project
@@ -95,7 +96,11 @@ test_real:
 	$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration --env=test_real
 	$(BEHAT) -p real
 
-.PHONY: composer_req composer_rem composer_install sf sf_entity db migration
+.PHONY: composer_req composer_rem composer_install sf sf_entity db migration test_fake test_real
+
+cs_fixer: ## Run PHP CS Fixer
+cs_fixer:
+	$(CS_FIXER) fix src ${ARGS}
 
 # rules based on files
 composer.lock: composer.json

@@ -75,6 +75,7 @@
     "require-dev": {
         "behat/behat": "^3.10",
         "friends-of-behat/symfony-extension": "^2.3",
+        "friendsofphp/php-cs-fixer": "^3.6",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "6.0.*",
         "symfony/css-selector": "6.0.*",
