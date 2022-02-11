@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Controller\Question;
 
-use App\Application\Query\Question\ReadAllQuestionsQuery;
 use App\Application\Query\QueryBusInterface;
+use App\Application\Query\Question\ReadAllQuestionsQuery;
 use App\Application\Query\ViewModelInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
