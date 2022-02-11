@@ -1,0 +1,63 @@
+parameters:
+    paths:
+        - ./src
+    exclude_files: ~
+    layers:
+        # Internal dependencies
+        -   name: Application
+            collectors:
+                -   type: className
+                    regex: App\\Application\\.*
+        -   name: Domain
+            collectors:
+                -   type: className
+                    regex: App\\Domain\\.*
+        -   name: Infrastructure
+            collectors:
+                -   type: className
+                    regex: App\\Infrastructure\\.*
+        # External dependencies
+        -   name: Doctrine
+            collectors:
+                -   type: className
+                    regex: Doctrine\\.*
+        -   name: HttpFoundation
+            collectors:
+                -   type: className
+                    regex: Symfony\\Component\\HttpFoundation\\.*
+        -   name: HttpKernel
+            collectors:
+                -   type: className
+                    regex: Symfony\\Component\\HttpKernel\\.*
+                -   type: className
+                    regex: Symfony\\Bundle\\FrameworkBundle\\Kernel\\.*
+        -   name: Messenger
+            collectors:
+                -   type: className
+                    regex: Symfony\\Component\\Messenger\\.*
+        -   name: Respect
+            collectors:
+                -   type: className
+                    regex: Respect\\.*
+        -   name: Routing
+            collectors:
+                -   type: className
+                    regex: Symfony\\Component\\Routing\\.*
+    ruleset:
+        Infrastructure:
+            # Internal dependencies
+            - Application
+            - Domain
+            # External dependencies
+            - Doctrine
+            - HttpFoundation
+            - HttpKernel
+            - Messenger
+            - Respect
+            - Routing
+        Application:
+            # Internal dependencies
+            - Domain
+        Domain:
+            # External dependencies
+            - Respect

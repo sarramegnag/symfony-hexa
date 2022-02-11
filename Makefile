@@ -13,6 +13,7 @@ SYMFONY         = $(EXEC_PHP) php bin/console
 COMPOSER        = $(EXEC_PHP) composer
 BEHAT           = $(EXEC_PHP) vendor/bin/behat
 CS_FIXER        = $(EXEC_PHP) tools/php-cs-fixer/vendor/bin/php-cs-fixer
+DEPTRAC        = $(EXEC_PHP) tools/deptrac/vendor/bin/deptrac
 
 ##
 ## Project
@@ -100,7 +101,11 @@ cs_fixer: ## Run PHP CS Fixer
 cs_fixer: vendor_cs_fixer
 	$(CS_FIXER) fix src ${ARGS}
 
-.PHONY: composer_req composer_rem composer_install sf sf_entity db migration test_fake test_real cs_fixer
+deptrac: ## Run Deptrac
+deptrac: vendor_deptrac
+	$(DEPTRAC) analyse --fail-on-uncovered --report-uncovered
+
+.PHONY: composer_req composer_rem composer_install sf sf_entity db migration test_fake test_real cs_fixer deptrac
 
 # rules based on files
 composer.lock: composer.json
@@ -111,6 +116,9 @@ vendor: composer.lock
 
 vendor_cs_fixer: tools/php-cs-fixer/composer.lock
 	$(COMPOSER) install --no-scripts --working-dir=tools/php-cs-fixer
+
+vendor_deptrac: tools/deptrac/composer.lock
+	$(COMPOSER) install --no-scripts --working-dir=tools/deptrac
 
 
 
